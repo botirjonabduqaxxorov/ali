@@ -1,0 +1,56 @@
+
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h1>Davomat Ro'yxati</h1>
+        
+        <!-- Yangi davomat qo'shish uchun xodimni tanlash -->
+        <form method="post" action="{% url 'davomat_create' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <select name="id"  id="xodim_select" class="form-control">
+                    {% for xodim in xodimlar %}
+                    <option value="{{xodim.id}}"> {{ xodim.full_name }} </option>
+                    {% endfor %}
+                </select>
+                <button type="submit" id="create_button" class="btn btn-success mt-2">Keldi</button>
+            </div>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Xodim</th>
+                    <th>Sana</th>
+                    <th>Adress</th>
+                    <th>Harakat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in davomat %}
+                <tr>
+                    <td>{{ item.xodim.full_name }}</td>
+                    <td>{{ item.sana }}</td>
+                    <td>{{ item.xodim.address }}</td>   
+                    <td>
+                        <a href="{% url 'davomat_delete' item.id %}" class="btn btn-danger">O'chirish</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('create_button').addEventListener('click', function() {
+            var select = document.getElementById('xodim_select');
+            var url = select.value;
+            if (url) {
+                window.location.href = url;
+            }
+        });
+    </script>
+
+{% endblock %}

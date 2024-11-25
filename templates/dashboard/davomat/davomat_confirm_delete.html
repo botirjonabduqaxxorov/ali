@@ -1,0 +1,16 @@
+{%extends 'dashboard/base.html'%}
+{%block content%}
+<body>
+    <div class="container mt-6">
+        <h1>Davomatni O'chirish</h1>
+        <p>Rostdan ham ushbu davomatni o'chirmoqchimisiz?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Ha, o'chirilsin</button>
+            <a href="{% url 'davomat_list' %}" class="btn btn-secondary">Bekor qilish</a>
+        </form>
+
+    </div>
+</body>
+</html>
+{% endblock %}

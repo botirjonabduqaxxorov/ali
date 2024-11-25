@@ -1,0 +1,19 @@
+{%extends 'dashboard/base.html'%}
+{%block content%}
+    <div class="container mt-4">
+        <h1>Yangi Davomat Qo'shish</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="sana">Sana</label>
+                <input type="date" class="form-control" id="sana" name="sana" required>
+            </div>
+            <div class="form-group">
+                <label for="active">Active</label>
+                <input type="checkbox" id="active" name="active">
+            </div>
+            <button type="submit" class="btn btn-primary">Saqlash</button>
+        </form>
+    </div>
+
+{%endblock%}
